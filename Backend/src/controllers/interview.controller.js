@@ -10,7 +10,7 @@ async function generateInterviewReportController(req, res) {
         let resumeText = "";
         
         if (req.file) {
-            const data = await pdfParse(req.file.buffer);
+            const data = await pdfParse(Uint8Array.from(req.file.buffer));
             resumeText = data.text;
         }
 
