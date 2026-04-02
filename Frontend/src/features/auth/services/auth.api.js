@@ -39,7 +39,7 @@ export async function logout() {
 
 export async function getMe(token) {
     try {
-        const response = await api.get('/get-me', {
+        const response = await api.get('/api/auth/get-me', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
