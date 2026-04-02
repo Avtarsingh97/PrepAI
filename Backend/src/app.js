@@ -8,7 +8,7 @@ app.use(cookieParser());
 app.use(express.json());
 console.log(process.env.FRONTEND_URL);
 app.use(cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: [process.env.FRONTEND_URL || "http://localhost:5173"],
     credentials: true
 }));
 

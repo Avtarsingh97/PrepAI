@@ -10,7 +10,9 @@ export const generateInterviewReport = async ({jobDescription, resume, selfDescr
 
     const formData = new FormData()
     formData.append("jobDescription", jobDescription)
-    formData.append("resume", resume)
+    if (resume) {
+        formData.append("resume", resume)
+    }
     formData.append("selfDescription", selfDescription)
     
     const response = await api.post("/api/interview/", formData,{
