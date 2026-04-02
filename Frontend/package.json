@@ -13,6 +13,7 @@
     "@auth0/auth0-react": "^2.16.0",
     "axios": "^1.13.6",
     "dotenv": "^17.3.1",
+    "pdf-parse-new": "^2.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router": "^7.13.1",
