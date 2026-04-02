@@ -1,4 +1,6 @@
-const pdfParse = require('pdf-parse');
+// const pdfParse = require('pdf-parse');
+const pdfModule = require('pdf-parse');
+const pdfParse = pdfModule.default?.default || pdfModule.default || pdfModule;
 const { generateInterviewReport, generateResumePdf } = require('../services/ai.service');
 const interviewReportModel = require('../models/interviewReport.model');
 
@@ -11,13 +13,7 @@ async function generateInterviewReportController(req, res) {
         console.log(req.file);
         console.log(req.file.buffer);
         if (req.file) {
-            // pdf-parse can sometimes be nested under .default depending on environment/setup
-            const parse = typeof pdfParse === 'function' ? pdfParse : pdfParse.default;
-            if (typeof parse !== 'function') {
-                throw new Error('pdf-parse could not be loaded as a function');
-            }
-            
-            const data = await parse(req.file.buffer);
+            const data = await pdfParse(req.file.buffer);
             resumeText = data.text;
         }
         console.log(resumeText);
