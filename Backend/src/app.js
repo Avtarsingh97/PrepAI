@@ -18,4 +18,9 @@ const interviewRouter = require('./routes/interview.route');
 // using all the routes here
 app.use('/api/auth', authRouter);
 app.use('/api/interview', interviewRouter);
+
+app.get('/', (req, res) => {
+    res.send('PrepAI Backend is running!');
+});
+
 module.exports = app;
