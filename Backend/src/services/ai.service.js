@@ -175,10 +175,25 @@ Return ONLY valid JSON that matches the schema.
 }
 
 async function generatePdfFromHtml(htmlContent) {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            headless: "new", // Modern headless mode
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--no-zygote",
+                "--single-process"
+            ],
+            // Use local chrome if provided via environment variable
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
+        });
+    } catch (error) {
+        console.error("Error launching puppeteer browser:", error);
+        throw new Error("Failed to initialize PDF generator. Please ensure Chrome is installed correctly.");
+    }
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "networkidle2" });
 
