@@ -2,6 +2,7 @@ import React, { useState , useEffect} from 'react';
 import '../style/interview.scss';
 import { useInterview } from '../hooks/useInterview';
 import { useParams } from 'react-router';
+import Loader from '../../../components/Loader/Loader.jsx';
 
 // Icons as basic SVG components
 const CodeIcon = () => (
@@ -56,7 +57,12 @@ const Interview = () => {
   };
 
   if(loading || !report){
-    return <main className='loading-screen'>Loading your interview plan...</main>
+    return (
+      <Loader 
+        message="AI is preparing your interview data..." 
+        subtext="Please wait while we fetch your analysis, technical questions, and personalized preparation plan."
+      />
+    )
   }
 
   const renderContent = () => {
@@ -71,7 +77,6 @@ const Interview = () => {
       title = "Behavioral Questions";
     } else if (activeTab === 'roadmap') {
       // Very basic rendering for roadmap
-      console.log(report.preparationPlan)
       list = report.preparationPlan.map(p => ({
         question: `Day ${p.day}: ${p.focus}`,
         answer: p.task.map(item => (<li>{item}</li>))

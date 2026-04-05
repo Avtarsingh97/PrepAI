@@ -27,7 +27,6 @@ const Login = () => {
     const handleGoogleLogin = async () => {
         try {
             const res =  loginWithRedirect();
-            console.log(res);
             res.isAuthenticated ? navigate("/dashboard") : navigate("/login");
             // setUser(res.user);
             // navigate("/");

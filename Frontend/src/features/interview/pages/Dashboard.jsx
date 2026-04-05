@@ -4,6 +4,7 @@ import { useInterview } from "../hooks/useInterview.js"
 import { useNavigate } from "react-router";
 import Navbar from "../../../components/Navbar/Navbar";
 import { useAuth } from "../../auth/hooks/useAuth.js";
+import Loader from "../../../components/Loader/Loader.jsx";
 
 const Dashboard = () => {
 
@@ -51,9 +52,10 @@ const Dashboard = () => {
 
   if (isGenerating) {
     return (
-      <main className="loading-screen">
-        <h1>Generating Report...</h1>
-      </main>
+      <Loader 
+        message="AI is analyzing your profile..." 
+        subtext="Our advanced algorithms are crafting a personalized interview preparation plan, technical questions, and skill gap analysis."
+      />
     )
   }
 
@@ -62,7 +64,7 @@ const Dashboard = () => {
       <Navbar />
 
       <div className="dashboard-nav-breadcrumb">
-        <button className="back-btn" onClick={() => navigate('/')}>
+        <button className="back-home-btn" onClick={() => navigate('/')}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           <span>Back to Home</span>
         </button>
